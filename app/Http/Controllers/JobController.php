@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\Queue\Job;
+
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\Job;
 
 class JobController extends Controller
 {
@@ -12,25 +13,13 @@ class JobController extends Controller
     // @route GET /jobs
     public function index(): View
     {
-        $title = 'Available Jobs';
-        $jobs = [
-            'Backend Developer',
-            'Frontend Developer',
-            'UI/UX Designer',
-            'Product Manager',
-            'Project Manager',
-            'DevOps Engineer',
-            'Data Scientist',
-            'Machine Learning Engineer',
-            'QA Engineer',
-            'Technical Writer',
-        ];
+        $jobs = Job::all();
 
-        return view('jobs.index', compact('title', 'jobs'));
+        return view('jobs.index')->with('jobs', $jobs);
     }
 
-   // @desc Show the form for creating a new job
-   // @route GET /jobs/create
+    // @desc Show the form for creating a new job
+    // @route GET /jobs/create
     public function create(): View
     {
         return view('jobs.create');
