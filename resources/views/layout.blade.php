@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -17,7 +18,11 @@
 
   <body class="bg-gray-100">
     <x-header />
-    <main class="container mx-auto p-4 mt-4">{{ $slot }}</main>
+    @if(request()->is('/'))
+    <x-hero />
+    <x-top-banner />
+    @endif
+    <main class="container mx-auto p-4 mt-4">{{ $slot }} <x-bottom-banner /></main>
     <script src="{{ asset('js/script.js') }}"></script>
   </body>
 </html>
